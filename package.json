@@ -8,6 +8,10 @@
     "dev": "remix dev --manual",
     "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
     "start": "remix-serve ./build/index.js",
+    "test:e2e": "playwright test",
+    "test:ui": "playwright test --ui",
+    "test:gen": "playwright codegen",
+    "test:report": "playwright show-report",
     "typecheck": "tsc"
   },
   "dependencies": {

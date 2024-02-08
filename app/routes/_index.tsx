@@ -1,4 +1,4 @@
-// import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import type { MetaFunction } from "@remix-run/node";
 
 export const meta: MetaFunction = () => {
@@ -9,5 +9,9 @@ export const meta: MetaFunction = () => {
 };
 
 export default function Index() {
-  return <div>{/* <Button className="text-red-600">Click me</Button> */}</div>;
+  return (
+    <div>
+      <Button className="text-red-600">Click me</Button>
+    </div>
+  );
 }
