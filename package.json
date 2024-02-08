@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "build": "remix build",
+    "db:gen": "npx prisma generate",
+    "db:seed": "npx prisma generate && prisma db seed",
     "dev": "remix dev --manual",
     "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
     "start": "remix-serve ./build/index.js",
@@ -15,6 +17,7 @@
     "typecheck": "tsc"
   },
   "dependencies": {
+    "@prisma/client": "5.9.1",
     "@radix-ui/react-slot": "^1.0.2",
     "@remix-run/css-bundle": "^2.6.0",
     "@remix-run/node": "^2.6.0",
@@ -25,10 +28,7 @@
     "isbot": "^4.1.0",
     "lucide-react": "^0.323.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "remix-flat-routes": "^0.6.4",
-    "tailwind-merge": "^2.2.1",
-    "tailwindcss-animate": "^1.0.7"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@playwright/test": "^1.41.2",
@@ -48,10 +48,18 @@
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "postcss": "^8.4.35",
+    "prisma": "^5.9.1",
+    "remix-flat-routes": "^0.6.4",
+    "tailwind-merge": "^2.2.1",
     "tailwindcss": "^3.4.1",
+    "tailwindcss-animate": "^1.0.7",
+    "tsx": "^4.7.0",
     "typescript": "^5.1.6"
   },
   "engines": {
     "node": ">=18.0.0"
+  },
+  "prisma": {
+    "seed": "tsx ./prisma/seed.ts"
   }
 }
