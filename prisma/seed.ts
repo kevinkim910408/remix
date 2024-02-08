@@ -1,17 +1,8 @@
-import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient();
+import { db } from "@/utils/db.server";
 
-const seed = async () => {
-  if (process.env.NODE_ENV === "production") {
-    throw new Error(
-      "🚨 Cannot seed production database, please read Database.md docs"
-    );
-  }
-  console.log("🌱 Seeding...");
-  console.time(`🌱 Database has been seeded`);
-
-  await prisma.actor.create({
-    data: {
+const samples = () => {
+  return [
+    {
       name: "an Actor",
       nation: "Canada",
       movie: {
@@ -33,15 +24,26 @@ const seed = async () => {
         ],
       },
     },
-  });
+  ];
+};
+
+const seed = async () => {
+  if (process.env.NODE_ENV === "production") {
+    throw new Error(
+      "🚨 Cannot seed production database, please read Database.md docs"
+    );
+  }
+
+  console.log("🌱 Seeding...");
+  console.time(`🌱 Database has been seeded`);
+
+  await Promise.all(
+    samples().map((sample) => {
+      return db.actor.create({ data: sample });
+    })
+  );
+
   console.timeEnd(`🌱 Database has been seeded`);
 };
 
-seed()
-  .catch((e) => {
-    console.error(e);
-    process.exit(1);
-  })
-  .finally(async () => {
-    await prisma.$disconnect();
-  });
+seed();
